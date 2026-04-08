@@ -34,7 +34,11 @@ require_once 'includes/header.php';
                 <div class="carousel-inner">
                     <?php foreach ($images as $i => $img): ?>
                     <div class="carousel-item <?= $i === 0 ? 'active' : '' ?>">
-                        <img src="<?= UPLOADS_URL . htmlspecialchars($img) ?>" class="d-block w-100" style="height:420px;object-fit:cover;" alt="<?= htmlspecialchars($boat['name']) ?>">
+                        <img src="<?= UPLOADS_URL . htmlspecialchars($img) ?>"
+                             class="d-block w-100 carousel-zoomable"
+                             style="height:420px;object-fit:cover;cursor:zoom-in;"
+                             alt="<?= htmlspecialchars($boat['name']) ?>"
+                             data-index="<?= $i ?>">
                     </div>
                     <?php endforeach; ?>
                 </div>
@@ -47,6 +51,70 @@ require_once 'includes/header.php';
                 </button>
                 <?php endif; ?>
             </div>
+
+            <!-- Lightbox Modal -->
+            <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen modal-dialog-centered">
+                    <div class="modal-content bg-black border-0">
+                        <div class="modal-header border-0 position-absolute top-0 end-0 z-3 p-3">
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body d-flex align-items-center justify-content-center p-0 position-relative">
+                            <button id="lbPrev" class="btn btn-dark btn-lg position-absolute start-0 ms-3 opacity-75" style="z-index:10;">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            <img id="lightboxImg" src="" alt="" style="max-height:100vh;max-width:100%;object-fit:contain;">
+                            <button id="lbNext" class="btn btn-dark btn-lg position-absolute end-0 me-3 opacity-75" style="z-index:10;">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div class="modal-footer border-0 justify-content-center pb-3">
+                            <small id="lbCounter" class="text-white-50"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+            (function() {
+                const images = <?= json_encode(array_map(fn($img) => UPLOADS_URL . $img, $images)) ?>;
+                let current = 0;
+
+                function openLightbox(index) {
+                    current = index;
+                    updateLightbox();
+                    new bootstrap.Modal(document.getElementById('lightboxModal')).show();
+                }
+
+                function updateLightbox() {
+                    document.getElementById('lightboxImg').src = images[current];
+                    document.getElementById('lbCounter').textContent = (current + 1) + ' / ' + images.length;
+                    document.getElementById('lbPrev').style.display = images.length > 1 ? '' : 'none';
+                    document.getElementById('lbNext').style.display = images.length > 1 ? '' : 'none';
+                }
+
+                document.querySelectorAll('.carousel-zoomable').forEach(img => {
+                    img.addEventListener('click', () => openLightbox(parseInt(img.dataset.index)));
+                });
+
+                document.getElementById('lbPrev').addEventListener('click', () => {
+                    current = (current - 1 + images.length) % images.length;
+                    updateLightbox();
+                });
+                document.getElementById('lbNext').addEventListener('click', () => {
+                    current = (current + 1) % images.length;
+                    updateLightbox();
+                });
+
+                document.addEventListener('keydown', e => {
+                    const modal = document.getElementById('lightboxModal');
+                    if (!modal.classList.contains('show')) return;
+                    if (e.key === 'ArrowLeft') { current = (current - 1 + images.length) % images.length; updateLightbox(); }
+                    if (e.key === 'ArrowRight') { current = (current + 1) % images.length; updateLightbox(); }
+                    if (e.key === 'Escape') bootstrap.Modal.getInstance(modal)?.hide();
+                });
+            })();
+            </script>
             <?php else: ?>
             <img src="<?= SITE_URL ?>/assets/images/boat-placeholder.jpg" class="img-fluid rounded shadow" style="height:420px;object-fit:cover;width:100%;" alt="No image available">
             <?php endif; ?>
