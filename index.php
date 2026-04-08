@@ -14,8 +14,10 @@ require_once 'includes/header.php';
     <div class="container">
         <h1 class="display-3 fw-bold mb-3">Set Sail Your Way</h1>
         <p class="lead mb-4 fs-5">Explore the Dutch waterways with our premium boat rental fleet. No licence required for most vessels.</p>
-        <a href="boats.php" class="btn btn-primary btn-lg me-2 px-4">View Our Boats</a>
-        <a href="booking.php" class="btn btn-outline-light btn-lg px-4">Book Now</a>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mt-2">
+            <a href="boats.php" class="btn btn-primary btn-lg px-4">View Our Boats</a>
+            <a href="booking.php" class="btn btn-outline-light btn-lg px-4">Book Now</a>
+        </div>
     </div>
     <a href="#content" class="hero-scroll">
         <span>Scroll</span>
