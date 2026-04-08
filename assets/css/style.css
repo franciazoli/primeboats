@@ -43,6 +43,7 @@ h1, h2, h3, h4, h5, h6,
 .hero {
     background: linear-gradient(135deg, var(--dark-navy) 0%, var(--ocean-blue) 100%);
     min-height: calc(100vh - 58px);
+    min-height: calc(100dvh - 58px);
     display: flex;
     align-items: center;
     position: relative;
@@ -190,7 +191,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* ─── Admin sidebar ─────────────────────────────────────────── */
 .admin-sidebar {
-    min-height: calc(100vh - 58px);
+    min-height: 100vh;
     background: var(--dark-navy);
 }
 
@@ -225,7 +226,10 @@ h1, h2, h3, h4, h5, h6,
 
 /* ─── Responsive ────────────────────────────────────────────── */
 @media (max-width: 768px) {
-    .hero { min-height: 100vh; }
+    .hero {
+        min-height: unset;
+        padding: 100px 0 80px;
+    }
 
     /* boat detail page carousel */
     #boatCarousel img {
