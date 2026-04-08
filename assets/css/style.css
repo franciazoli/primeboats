@@ -1,10 +1,45 @@
+/* ─── Brand Colors ──────────────────────────────────────────── */
 :root {
-    --primary: #0d6efd;
-    --dark-navy: #0a1628;
-    --ocean-blue: #1a6b8a;
+    --primary:       #0077b6;
+    --primary-dark:  #005f92;
+    --dark-navy:     #0a1628;
+    --ocean-blue:    #1a6b8a;
+
+    /* Override Bootstrap 5 primary */
+    --bs-primary:        #0077b6;
+    --bs-primary-rgb:    0, 119, 182;
+    --bs-link-color:     #0077b6;
+    --bs-link-hover-color: #005f92;
 }
 
-/* Hero */
+/* ─── Typography ────────────────────────────────────────────── */
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #1e2a35;
+}
+
+h1, h2, h3, h4, h5, h6,
+.fw-bold, .display-3, .display-6 {
+    font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+/* ─── Navbar ────────────────────────────────────────────────── */
+.navbar-custom {
+    background-color: var(--dark-navy);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link {
+    color: rgba(255,255,255,0.85);
+    transition: color 0.2s;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+    color: #fff;
+}
+
+/* ─── Hero ──────────────────────────────────────────────────── */
 .hero {
     background: linear-gradient(135deg, var(--dark-navy) 0%, var(--ocean-blue) 100%);
     min-height: 90vh;
@@ -24,7 +59,34 @@
 
 .hero .container { position: relative; z-index: 1; }
 
-/* Boat cards */
+/* Scroll-down arrow */
+.hero-scroll {
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+    transition: color 0.2s;
+}
+
+.hero-scroll:hover { color: #fff; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%       { transform: translateX(-50%) translateY(8px); }
+}
+
+/* ─── Boat Cards ────────────────────────────────────────────── */
 .boat-card {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     border: none;
@@ -41,14 +103,92 @@
     object-fit: cover;
 }
 
+/* Image overlay on hover */
+.card-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-wrapper img {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.boat-card:hover .card-img-wrapper img {
+    transform: scale(1.04);
+}
+
+.card-img-overlay-hover {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 119, 182, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.boat-card:hover .card-img-overlay-hover {
+    opacity: 1;
+}
+
+.card-img-overlay-hover span {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    border: 2px solid rgba(255,255,255,0.8);
+    padding: 8px 20px;
+    border-radius: 4px;
+}
+
 .badge-rented {
     background-color: #dc3545;
 }
 
-/* Section spacing */
+/* ─── Section spacing ───────────────────────────────────────── */
 .section { padding: 80px 0; }
 
-/* Admin sidebar */
+/* ─── Footer ────────────────────────────────────────────────── */
+.site-footer {
+    background-color: var(--dark-navy);
+}
+
+.site-footer a.footer-link {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.site-footer a.footer-link:hover {
+    color: #fff;
+}
+
+.site-footer .social-icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.65);
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+
+.site-footer .social-icons a:hover {
+    background: var(--primary);
+    color: #fff;
+}
+
+/* ─── Admin sidebar ─────────────────────────────────────────── */
 .admin-sidebar {
     min-height: 100vh;
     background: var(--dark-navy);
@@ -67,7 +207,7 @@
     background: rgba(255,255,255,0.1);
 }
 
-/* Image preview grid */
+/* ─── Image preview grid (admin) ────────────────────────────── */
 .img-preview-grid {
     display: flex;
     flex-wrap: wrap;
@@ -81,4 +221,14 @@
     object-fit: cover;
     border-radius: 6px;
     border: 2px solid #dee2e6;
+}
+
+/* ─── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .hero { min-height: 70vh; }
+
+    /* boat detail page carousel */
+    #boatCarousel img {
+        height: 260px !important;
+    }
 }

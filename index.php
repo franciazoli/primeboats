@@ -17,10 +17,14 @@ require_once 'includes/header.php';
         <a href="boats.php" class="btn btn-primary btn-lg me-2 px-4">View Our Boats</a>
         <a href="booking.php" class="btn btn-outline-light btn-lg px-4">Book Now</a>
     </div>
+    <a href="#content" class="hero-scroll">
+        <span>Scroll</span>
+        <i class="bi bi-chevron-down fs-5"></i>
+    </a>
 </section>
 
 <!-- Features -->
-<section class="section bg-light">
+<section id="content" class="section bg-light">
     <div class="container">
         <div class="row g-4 text-center">
             <div class="col-md-4">
@@ -62,10 +66,13 @@ require_once 'includes/header.php';
             ?>
             <div class="col-md-4">
                 <div class="card boat-card h-100">
-                    <img src="<?= htmlspecialchars($thumb) ?>" class="card-img-top" alt="<?= htmlspecialchars($boat['name']) ?>">
-                    <div class="card-body">
+                    <a href="boat.php?id=<?= $boat['id'] ?>" class="card-img-wrapper text-decoration-none">
+                        <img src="<?= htmlspecialchars($thumb) ?>" alt="<?= htmlspecialchars($boat['name']) ?>">
+                        <div class="card-img-overlay-hover"><span>View Details</span></div>
+                    </a>
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title fw-bold"><?= htmlspecialchars($boat['name']) ?></h5>
-                        <p class="card-text text-secondary small"><?= nl2br(htmlspecialchars(substr($boat['description'] ?? '', 0, 100))) ?>...</p>
+                        <p class="card-text text-secondary small flex-grow-1"><?= nl2br(htmlspecialchars(substr($boat['description'] ?? '', 0, 100))) ?>...</p>
                         <div class="d-flex justify-content-between align-items-center mt-3">
                             <span class="fw-bold text-primary">€<?= number_format($boat['price_per_day'], 2) ?>/day</span>
                             <a href="boat.php?id=<?= $boat['id'] ?>" class="btn btn-sm btn-outline-primary">View Details</a>

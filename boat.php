@@ -36,7 +36,7 @@ require_once 'includes/header.php';
                     <div class="carousel-item <?= $i === 0 ? 'active' : '' ?>">
                         <img src="<?= UPLOADS_URL . htmlspecialchars($img) ?>"
                              class="d-block w-100 carousel-zoomable"
-                             style="height:420px;object-fit:cover;cursor:zoom-in;"
+                             style="height:clamp(240px, 40vw, 420px);object-fit:cover;cursor:zoom-in;"
                              alt="<?= htmlspecialchars($boat['name']) ?>"
                              data-index="<?= $i ?>">
                     </div>

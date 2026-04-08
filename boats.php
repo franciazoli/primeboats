@@ -24,12 +24,15 @@ require_once 'includes/header.php';
         ?>
         <div class="col-md-6 col-lg-4">
             <div class="card boat-card h-100 <?= $boat['is_rented'] ? 'opacity-75' : '' ?>">
-                <div class="position-relative">
-                    <img src="<?= htmlspecialchars($thumb) ?>" class="card-img-top" alt="<?= htmlspecialchars($boat['name']) ?>">
-                    <?php if ($boat['is_rented']): ?>
-                        <span class="position-absolute top-0 end-0 m-2 badge badge-rented">Currently Rented</span>
+                <a href="boat.php?id=<?= $boat['id'] ?>" class="card-img-wrapper text-decoration-none">
+                    <img src="<?= htmlspecialchars($thumb) ?>" alt="<?= htmlspecialchars($boat['name']) ?>">
+                    <?php if (!$boat['is_rented']): ?>
+                    <div class="card-img-overlay-hover"><span>View & Book</span></div>
                     <?php endif; ?>
-                </div>
+                    <?php if ($boat['is_rented']): ?>
+                    <span class="position-absolute top-0 end-0 m-2 badge badge-rented" style="z-index:2;">Currently Rented</span>
+                    <?php endif; ?>
+                </a>
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title fw-bold"><?= htmlspecialchars($boat['name']) ?></h5>
                     <p class="card-text text-secondary small flex-grow-1"><?= nl2br(htmlspecialchars(substr($boat['description'] ?? '', 0, 120))) ?>...</p>
@@ -43,7 +46,7 @@ require_once 'includes/header.php';
                         <?php endif; ?>
                         <div class="col-6 fw-bold text-primary">€<?= number_format($boat['price_per_day'], 2) ?>/day</div>
                     </div>
-                    <a href="boat.php?id=<?= $boat['id'] ?>" class="btn btn-outline-primary btn-sm">
+                    <a href="boat.php?id=<?= $boat['id'] ?>" class="btn btn-outline-primary btn-sm mt-auto">
                         <?= $boat['is_rented'] ? 'View Details' : 'View & Book' ?>
                     </a>
                 </div>
