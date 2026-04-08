@@ -82,12 +82,30 @@ require_once 'includes/header.php';
                     </div>
                 </div>
                 <?php endif; ?>
-                <?php if ($boat['year']): ?>
+                <?php if ($boat['weight_kg']): ?>
                 <div class="col-6">
                     <div class="border rounded p-3 text-center">
-                        <i class="bi bi-calendar fs-4 text-primary d-block mb-1"></i>
-                        <small class="text-secondary">Year</small>
-                        <div class="fw-bold"><?= $boat['year'] ?></div>
+                        <i class="bi bi-box-seam fs-4 text-primary d-block mb-1"></i>
+                        <small class="text-secondary">Weight</small>
+                        <div class="fw-bold"><?= $boat['weight_kg'] ?> kg</div>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <?php if ($boat['load_capacity_kg']): ?>
+                <div class="col-6">
+                    <div class="border rounded p-3 text-center">
+                        <i class="bi bi-arrow-down-circle fs-4 text-primary d-block mb-1"></i>
+                        <small class="text-secondary">Load Capacity</small>
+                        <div class="fw-bold"><?= $boat['load_capacity_kg'] ?> kg</div>
+                    </div>
+                </div>
+                <?php endif; ?>
+                <?php if ($boat['mountable_engine']): ?>
+                <div class="col-6">
+                    <div class="border rounded p-3 text-center">
+                        <i class="bi bi-gear fs-4 text-primary d-block mb-1"></i>
+                        <small class="text-secondary">Mountable Engine</small>
+                        <div class="fw-bold"><?= htmlspecialchars($boat['mountable_engine']) ?></div>
                     </div>
                 </div>
                 <?php endif; ?>

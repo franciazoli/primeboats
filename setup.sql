@@ -8,7 +8,9 @@ CREATE TABLE IF NOT EXISTS boats (
     price_per_day DECIMAL(10,2) NOT NULL DEFAULT 0.00,
     capacity INT NOT NULL DEFAULT 1,
     length_m DECIMAL(5,2) DEFAULT NULL,
-    year INT DEFAULT NULL,
+    weight_kg INT DEFAULT NULL,
+    load_capacity_kg INT DEFAULT NULL,
+    mountable_engine VARCHAR(50) DEFAULT NULL,
     images JSON DEFAULT NULL,
     is_rented TINYINT(1) NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

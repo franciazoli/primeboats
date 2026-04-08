@@ -3,15 +3,15 @@
         <i class="bi bi-water me-2"></i>PrimeBoats
     </div>
     <nav class="nav flex-column flex-grow-1">
-        <a href="index.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'index.php' ? 'active' : '' ?>">
+        <a href="/admin/index.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'index.php' && strpos($_SERVER['PHP_SELF'], '/boats/') === false ? 'active' : '' ?>">
             <i class="bi bi-speedometer2 me-2"></i>Dashboard
         </a>
-        <a href="boats/index.php" class="nav-link <?= strpos($_SERVER['PHP_SELF'], '/boats/') !== false ? 'active' : '' ?>">
+        <a href="/admin/boats/index.php" class="nav-link <?= strpos($_SERVER['PHP_SELF'], '/boats/') !== false ? 'active' : '' ?>">
             <i class="bi bi-water me-2"></i>Boats
         </a>
     </nav>
     <div class="mt-auto">
-        <a href="logout.php" class="nav-link text-danger">
+        <a href="/admin/logout.php" class="nav-link text-danger">
             <i class="bi bi-box-arrow-right me-2"></i>Logout
         </a>
     </div>

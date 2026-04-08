@@ -10,8 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = trim($_POST['description'] ?? '');
     $price       = filter_input(INPUT_POST, 'price_per_day', FILTER_VALIDATE_FLOAT);
     $capacity    = filter_input(INPUT_POST, 'capacity', FILTER_VALIDATE_INT);
-    $length      = filter_input(INPUT_POST, 'length_m', FILTER_VALIDATE_FLOAT) ?: null;
-    $year        = filter_input(INPUT_POST, 'year', FILTER_VALIDATE_INT) ?: null;
+    $length           = filter_input(INPUT_POST, 'length_m', FILTER_VALIDATE_FLOAT) ?: null;
+    $weight           = filter_input(INPUT_POST, 'weight_kg', FILTER_VALIDATE_INT) ?: null;
+    $loadCapacity     = filter_input(INPUT_POST, 'load_capacity_kg', FILTER_VALIDATE_INT) ?: null;
+    $mountableEngine  = trim($_POST['mountable_engine'] ?? '') ?: null;
 
     if (!$name)     $errors[] = 'Name is required.';
     if ($price === false || $price < 0) $errors[] = 'Valid price is required.';
@@ -31,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare("INSERT INTO boats (name, description, price_per_day, capacity, length_m, year, images) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$name, $description, $price, $capacity, $length, $year, json_encode($uploadedImages)]);
+        $stmt = $pdo->prepare("INSERT INTO boats (name, description, price_per_day, capacity, length_m, weight_kg, load_capacity_kg, mountable_engine, images) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$name, $description, $price, $capacity, $length, $weight, $loadCapacity, $mountableEngine, json_encode($uploadedImages)]);
         header('Location: index.php?msg=created'); exit;
     }
 }
@@ -78,8 +80,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="number" name="length_m" class="form-control" step="0.01" min="0" value="<?= htmlspecialchars($_POST['length_m'] ?? '') ?>">
             </div>
             <div class="col-md-4">
-                <label class="form-label">Year</label>
-                <input type="number" name="year" class="form-control" min="1900" max="<?= date('Y') ?>" value="<?= htmlspecialchars($_POST['year'] ?? '') ?>">
+                <label class="form-label">Weight (kg)</label>
+                <input type="number" name="weight_kg" class="form-control" min="0" value="<?= htmlspecialchars($_POST['weight_kg'] ?? '') ?>">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Load Capacity (kg)</label>
+                <input type="number" name="load_capacity_kg" class="form-control" min="0" value="<?= htmlspecialchars($_POST['load_capacity_kg'] ?? '') ?>">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Mountable Engine</label>
+                <input type="text" name="mountable_engine" class="form-control" placeholder="e.g. 5-25 PS" value="<?= htmlspecialchars($_POST['mountable_engine'] ?? '') ?>">
             </div>
             <div class="col-12">
                 <label class="form-label">Description</label>
