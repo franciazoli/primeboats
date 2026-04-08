@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6,
 /* ─── Hero ──────────────────────────────────────────────────── */
 .hero {
     background: linear-gradient(135deg, var(--dark-navy) 0%, var(--ocean-blue) 100%);
-    min-height: 90vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     position: relative;
@@ -225,7 +225,7 @@ h1, h2, h3, h4, h5, h6,
 
 /* ─── Responsive ────────────────────────────────────────────── */
 @media (max-width: 768px) {
-    .hero { min-height: 70vh; }
+    .hero { min-height: 100vh; }
 
     /* boat detail page carousel */
     #boatCarousel img {
