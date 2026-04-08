@@ -9,6 +9,9 @@
         <a href="/admin/boats/index.php" class="nav-link <?= strpos($_SERVER['PHP_SELF'], '/boats/') !== false ? 'active' : '' ?>">
             <i class="bi bi-water me-2"></i>Boats
         </a>
+        <a href="/admin/bookings.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'bookings.php' ? 'active' : '' ?>">
+            <i class="bi bi-calendar-check me-2"></i>Bookings
+        </a>
     </nav>
     <div class="mt-auto">
         <a href="/admin/logout.php" class="nav-link text-danger">
