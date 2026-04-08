@@ -11,6 +11,9 @@
         </a>
     </nav>
     <div class="mt-auto">
+        <a href="/admin/change-password.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'change-password.php' ? 'active' : '' ?>">
+            <i class="bi bi-lock me-2"></i>Change Password
+        </a>
         <a href="/admin/logout.php" class="nav-link text-danger">
             <i class="bi bi-box-arrow-right me-2"></i>Logout
         </a>
