@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $boatName = '';
         foreach ($boats as $b) { if ($b['id'] == $boatId) $boatName = $b['name']; }
-        $subject = "New Sales Inquiry – $boatName";
+        $subject = "New Sales Inquiry - $boatName";
         $body  = "New inquiry received:\n\n";
         $body .= "Name: $firstName $lastName\n";
         $body .= "Email: $email\n";
