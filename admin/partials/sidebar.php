@@ -10,7 +10,7 @@
             <i class="bi bi-water me-2"></i>Boats
         </a>
         <a href="/admin/bookings.php" class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'bookings.php' ? 'active' : '' ?>">
-            <i class="bi bi-calendar-check me-2"></i>Bookings
+            <i class="bi bi-envelope me-2"></i>Inquiries
         </a>
     </nav>
     <div class="mt-auto">

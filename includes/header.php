@@ -25,7 +25,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="<?= SITE_URL ?>">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= SITE_URL ?>/boats.php">Our Boats</a></li>
-                <li class="nav-item"><a class="nav-link" href="<?= SITE_URL ?>/booking.php">Book Now</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?= SITE_URL ?>/booking.php">Inquire</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?= SITE_URL ?>/contact.php">Contact</a></li>
             </ul>
         </div>

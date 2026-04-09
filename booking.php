@@ -2,7 +2,7 @@
 require_once 'includes/config.php';
 require_once 'includes/db.php';
 
-$pageTitle = 'Book a Boat – PrimeBoats';
+$pageTitle = 'Inquire About a Boat – PrimeBoats';
 
 $boats = $pdo->query("SELECT id, name FROM boats WHERE is_rented = 0 ORDER BY name")->fetchAll();
 
@@ -17,33 +17,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email      = trim($_POST['email'] ?? '');
     $phone      = trim($_POST['phone'] ?? '');
     $boatId     = filter_input(INPUT_POST, 'boat_id', FILTER_VALIDATE_INT);
-    $startDate  = trim($_POST['start_date'] ?? '');
-    $endDate    = trim($_POST['end_date'] ?? '');
     $message    = trim($_POST['message'] ?? '');
 
     if (!$firstName) $errors[] = 'First name is required.';
     if (!$lastName)  $errors[] = 'Last name is required.';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'A valid email address is required.';
     if (!$boatId)    $errors[] = 'Please select a boat.';
-    if (!$startDate || !strtotime($startDate)) $errors[] = 'Please select a valid start date.';
-    if (!$endDate   || !strtotime($endDate))   $errors[] = 'Please select a valid end date.';
-    if ($startDate && $endDate && strtotime($endDate) <= strtotime($startDate)) $errors[] = 'End date must be after start date.';
-    if ($startDate && strtotime($startDate) < strtotime('today')) $errors[] = 'Start date cannot be in the past.';
 
     if (empty($errors)) {
-        $stmt = $pdo->prepare("INSERT INTO bookings (boat_id, first_name, last_name, email, phone, start_date, end_date, message) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$boatId, $firstName, $lastName, $email, $phone, $startDate, $endDate, $message]);
+        $stmt = $pdo->prepare("INSERT INTO bookings (boat_id, first_name, last_name, email, phone, start_date, end_date, message) VALUES (?, ?, ?, ?, ?, NULL, NULL, ?)");
+        $stmt->execute([$boatId, $firstName, $lastName, $email, $phone, $message]);
 
-        // Notify owner by email
         $boatName = '';
         foreach ($boats as $b) { if ($b['id'] == $boatId) $boatName = $b['name']; }
-        $subject = "New Booking Request – $boatName";
-        $body  = "New booking request received:\n\n";
+        $subject = "New Sales Inquiry – $boatName";
+        $body  = "New inquiry received:\n\n";
         $body .= "Name: $firstName $lastName\n";
         $body .= "Email: $email\n";
         $body .= "Phone: $phone\n";
         $body .= "Boat: $boatName\n";
-        $body .= "Dates: $startDate to $endDate\n";
         $body .= "Message: $message\n";
         mail(CONTACT_EMAIL, $subject, $body, "From: noreply@primeboats.nl");
 
@@ -55,12 +47,12 @@ require_once 'includes/header.php';
 ?>
 
 <div class="container" style="max-width:640px; padding-top:60px; padding-bottom:80px;">
-    <h1 class="fw-bold mb-2">Book a Boat</h1>
-    <p class="text-secondary mb-5">Fill in the form below and we'll get back to you to confirm your reservation.</p>
+    <h1 class="fw-bold mb-2">Inquire About a Boat</h1>
+    <p class="text-secondary mb-5">Interested in one of our boats? Fill in the form and we'll get back to you as soon as possible.</p>
 
     <?php if ($success): ?>
     <div class="alert alert-success">
-        <i class="bi bi-check-circle me-2"></i><strong>Booking request sent!</strong> We'll contact you within 24 hours to confirm.
+        <i class="bi bi-check-circle me-2"></i><strong>Inquiry sent!</strong> We'll contact you shortly.
     </div>
     <?php else: ?>
 
@@ -103,21 +95,13 @@ require_once 'includes/header.php';
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-6">
-                <label class="form-label">Start Date *</label>
-                <input type="date" name="start_date" class="form-control" value="<?= htmlspecialchars($_POST['start_date'] ?? '') ?>" min="<?= date('Y-m-d') ?>" required>
-            </div>
-            <div class="col-6">
-                <label class="form-label">End Date *</label>
-                <input type="date" name="end_date" class="form-control" value="<?= htmlspecialchars($_POST['end_date'] ?? '') ?>" min="<?= date('Y-m-d', strtotime('+1 day')) ?>" required>
-            </div>
             <div class="col-12">
-                <label class="form-label">Message / Questions</label>
-                <textarea name="message" class="form-control" rows="4"><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
+                <label class="form-label">Message</label>
+                <textarea name="message" class="form-control" rows="4" placeholder="Any questions about the boat, viewing arrangements, etc."><?= htmlspecialchars($_POST['message'] ?? '') ?></textarea>
             </div>
             <div class="col-12 mt-2">
                 <button type="submit" class="btn btn-primary btn-lg w-100">
-                    <i class="bi bi-send me-2"></i>Send Booking Request
+                    <i class="bi bi-send me-2"></i>Send Inquiry
                 </button>
             </div>
         </div>

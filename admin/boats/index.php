@@ -31,7 +31,7 @@ $boats = $pdo->query("SELECT * FROM boats ORDER BY name ASC")->fetchAll();
                 'created' => 'Boat added successfully.',
                 'updated' => 'Boat updated successfully.',
                 'deleted' => 'Boat deleted.',
-                'toggled' => 'Rental status updated.',
+                'toggled' => 'Status updated.',
             ];
             echo htmlspecialchars($msgs[$_GET['msg']] ?? 'Done.');
             ?>
@@ -47,7 +47,7 @@ $boats = $pdo->query("SELECT * FROM boats ORDER BY name ASC")->fetchAll();
                 <thead class="table-light">
                     <tr>
                         <th>Name</th>
-                        <th>Price/day</th>
+                        <th>Price</th>
                         <th>Capacity</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -57,13 +57,13 @@ $boats = $pdo->query("SELECT * FROM boats ORDER BY name ASC")->fetchAll();
                     <?php foreach ($boats as $boat): ?>
                     <tr>
                         <td class="fw-semibold"><?= htmlspecialchars($boat['name']) ?></td>
-                        <td>€<?= number_format($boat['price_per_day'], 2) ?></td>
+                        <td>€<?= number_format($boat['price_per_day'], 0, ',', '.') ?></td>
                         <td><?= (int)$boat['capacity'] ?> persons</td>
                         <td>
                             <form method="POST" action="toggle_rented.php" class="d-inline">
                                 <input type="hidden" name="id" value="<?= $boat['id'] ?>">
                                 <button type="submit" class="btn btn-sm <?= $boat['is_rented'] ? 'btn-danger' : 'btn-success' ?>">
-                                    <?= $boat['is_rented'] ? '<i class="bi bi-lock me-1"></i>Rented' : '<i class="bi bi-check-circle me-1"></i>Available' ?>
+                                    <?= $boat['is_rented'] ? '<i class="bi bi-x-circle me-1"></i>Sold' : '<i class="bi bi-check-circle me-1"></i>For Sale' ?>
                                 </button>
                             </form>
                         </td>

@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS bookings (
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(150) NOT NULL,
     phone VARCHAR(30) DEFAULT NULL,
-    start_date DATE NOT NULL,
-    end_date DATE NOT NULL,
+    start_date DATE DEFAULT NULL,
+    end_date DATE DEFAULT NULL,
     message TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (boat_id) REFERENCES boats(id) ON DELETE CASCADE

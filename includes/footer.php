@@ -16,7 +16,7 @@
                 <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
                     <li><a href="<?= SITE_URL ?>" class="footer-link"><i class="bi bi-chevron-right me-1 small"></i>Home</a></li>
                     <li><a href="<?= SITE_URL ?>/boats.php" class="footer-link"><i class="bi bi-chevron-right me-1 small"></i>Our Boats</a></li>
-                    <li><a href="<?= SITE_URL ?>/booking.php" class="footer-link"><i class="bi bi-chevron-right me-1 small"></i>Book Now</a></li>
+                    <li><a href="<?= SITE_URL ?>/booking.php" class="footer-link"><i class="bi bi-chevron-right me-1 small"></i>Inquire</a></li>
                     <li><a href="<?= SITE_URL ?>/contact.php" class="footer-link"><i class="bi bi-chevron-right me-1 small"></i>Contact</a></li>
                 </ul>
             </div>

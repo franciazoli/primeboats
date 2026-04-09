@@ -2,7 +2,7 @@
 require_once 'includes/config.php';
 require_once 'includes/db.php';
 
-$pageTitle = 'Our Boats – PrimeBoats';
+$pageTitle = 'Boats for Sale – PrimeBoats';
 
 $boats = $pdo->query("SELECT * FROM boats ORDER BY is_rented ASC, name ASC")->fetchAll();
 
@@ -10,8 +10,8 @@ require_once 'includes/header.php';
 ?>
 
 <div class="container section">
-    <h1 class="fw-bold mb-2">Our Boats</h1>
-    <p class="text-secondary mb-5">Browse our full fleet. Availability is updated in real time.</p>
+    <h1 class="fw-bold mb-2">Boats for Sale</h1>
+    <p class="text-secondary mb-5">Browse our current inventory. Availability is updated in real time.</p>
 
     <?php if (empty($boats)): ?>
         <div class="alert alert-info">No boats available at the moment. Check back soon!</div>
@@ -30,7 +30,7 @@ require_once 'includes/header.php';
                     <div class="card-img-overlay-hover"><span>View & Book</span></div>
                     <?php endif; ?>
                     <?php if ($boat['is_rented']): ?>
-                    <span class="position-absolute top-0 end-0 m-2 badge badge-rented" style="z-index:2;">Currently Rented</span>
+                    <span class="position-absolute top-0 end-0 m-2 badge badge-rented" style="z-index:2;">Sold</span>
                     <?php endif; ?>
                 </a>
                 <div class="card-body d-flex flex-column">
@@ -44,10 +44,10 @@ require_once 'includes/header.php';
                         <?php if ($boat['year']): ?>
                         <div class="col-6"><i class="bi bi-calendar me-1"></i><?= $boat['year'] ?></div>
                         <?php endif; ?>
-                        <div class="col-6 fw-bold text-primary">€<?= number_format($boat['price_per_day'], 2) ?>/day</div>
+                        <div class="col-6 fw-bold text-primary">€<?= number_format($boat['price_per_day'], 0, ',', '.') ?></div>
                     </div>
                     <a href="boat.php?id=<?= $boat['id'] ?>" class="btn btn-outline-primary btn-sm mt-auto">
-                        <?= $boat['is_rented'] ? 'View Details' : 'View & Book' ?>
+                        <?= $boat['is_rented'] ? 'View Details' : 'View & Inquire' ?>
                     </a>
                 </div>
             </div>

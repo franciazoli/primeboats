@@ -15,7 +15,7 @@ $bookings = $pdo->query("
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Requests – PrimeBoats Admin</title>
+    <title>Inquiries – PrimeBoats Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
@@ -25,7 +25,7 @@ $bookings = $pdo->query("
     <?php include 'partials/sidebar.php'; ?>
     <div class="flex-grow-1 p-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold mb-0">Booking Requests</h4>
+            <h4 class="fw-bold mb-0">Inquiries</h4>
             <span class="badge bg-primary fs-6"><?= count($bookings) ?> total</span>
         </div>
 
@@ -41,7 +41,6 @@ $bookings = $pdo->query("
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Boat</th>
-                        <th>Dates</th>
                         <th>Message</th>
                         <th>Received</th>
                     </tr>
@@ -60,10 +59,6 @@ $bookings = $pdo->query("
                             <?php endif; ?>
                         </td>
                         <td><?= htmlspecialchars($bk['boat_name']) ?></td>
-                        <td class="text-nowrap">
-                            <?= htmlspecialchars($bk['start_date']) ?><br>
-                            <span class="text-secondary small">→ <?= htmlspecialchars($bk['end_date']) ?></span>
-                        </td>
                         <td style="max-width:250px;">
                             <?php if ($bk['message']): ?>
                             <span class="d-inline-block text-truncate" style="max-width:230px;" title="<?= htmlspecialchars($bk['message']) ?>">

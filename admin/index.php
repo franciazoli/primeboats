@@ -45,7 +45,7 @@ $recentBookings = $pdo->query("SELECT b.*, bo.name AS boat_name FROM bookings b 
                         <div class="bg-danger bg-opacity-10 rounded p-3"><i class="bi bi-lock fs-4 text-danger"></i></div>
                         <div>
                             <div class="fs-3 fw-bold"><?= $rentedBoats ?></div>
-                            <div class="text-secondary small">Currently Rented</div>
+                            <div class="text-secondary small">Sold</div>
                         </div>
                     </div>
                 </div>
@@ -56,28 +56,27 @@ $recentBookings = $pdo->query("SELECT b.*, bo.name AS boat_name FROM bookings b 
                         <div class="bg-success bg-opacity-10 rounded p-3"><i class="bi bi-calendar-check fs-4 text-success"></i></div>
                         <div>
                             <div class="fs-3 fw-bold"><?= $totalBookings ?></div>
-                            <div class="text-secondary small">Total Booking Requests</div>
+                            <div class="text-secondary small">Total Inquiries</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h5 class="fw-bold mb-3">Recent Booking Requests</h5>
+        <h5 class="fw-bold mb-3">Recent Inquiries</h5>
         <?php if (empty($recentBookings)): ?>
         <p class="text-secondary">No booking requests yet.</p>
         <?php else: ?>
         <div class="table-responsive">
             <table class="table table-hover align-middle">
                 <thead class="table-light">
-                    <tr><th>Name</th><th>Boat</th><th>Dates</th><th>Email</th><th>Received</th></tr>
+                    <tr><th>Name</th><th>Boat</th><th>Email</th><th>Received</th></tr>
                 </thead>
                 <tbody>
                     <?php foreach ($recentBookings as $bk): ?>
                     <tr>
                         <td><?= htmlspecialchars($bk['first_name'] . ' ' . $bk['last_name']) ?></td>
                         <td><?= htmlspecialchars($bk['boat_name']) ?></td>
-                        <td><?= $bk['start_date'] ?> → <?= $bk['end_date'] ?></td>
                         <td><a href="mailto:<?= htmlspecialchars($bk['email']) ?>"><?= htmlspecialchars($bk['email']) ?></a></td>
                         <td class="text-secondary small"><?= date('d M Y', strtotime($bk['created_at'])) ?></td>
                     </tr>

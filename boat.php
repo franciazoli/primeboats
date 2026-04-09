@@ -125,13 +125,13 @@ require_once 'includes/header.php';
             <div class="d-flex align-items-center gap-3 mb-2">
                 <h1 class="fw-bold mb-0"><?= htmlspecialchars($boat['name']) ?></h1>
                 <?php if ($boat['is_rented']): ?>
-                <span class="badge bg-danger">Currently Rented</span>
+                <span class="badge bg-danger">Sold</span>
                 <?php else: ?>
-                <span class="badge bg-success">Available</span>
+                <span class="badge bg-success">For Sale</span>
                 <?php endif; ?>
             </div>
 
-            <p class="display-6 text-primary fw-bold mb-4">€<?= number_format($boat['price_per_day'], 2) ?><small class="fs-6 text-secondary fw-normal">/day</small></p>
+            <p class="display-6 text-primary fw-bold mb-4">€<?= number_format($boat['price_per_day'], 0, ',', '.') ?></p>
 
             <div class="row g-3 mb-4">
                 <div class="col-6">
@@ -185,11 +185,11 @@ require_once 'includes/header.php';
 
             <?php if (!$boat['is_rented']): ?>
             <a href="booking.php?boat_id=<?= $boat['id'] ?>" class="btn btn-primary btn-lg w-100">
-                <i class="bi bi-calendar-plus me-2"></i>Request to Book
+                <i class="bi bi-envelope me-2"></i>Send an Inquiry
             </a>
             <?php else: ?>
             <div class="alert alert-warning">
-                <i class="bi bi-clock me-2"></i>This boat is currently rented. Check back soon or <a href="boats.php">view other boats</a>.
+                <i class="bi bi-x-circle me-2"></i>This boat has been sold. <a href="boats.php">View other boats</a>.
             </div>
             <?php endif; ?>
         </div>

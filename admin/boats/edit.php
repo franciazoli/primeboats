@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($_POST['name'] ?? $boat['name']) ?>" required>
             </div>
             <div class="col-md-4">
-                <label class="form-label">Price per Day (€) *</label>
+                <label class="form-label">Asking Price (€) *</label>
                 <input type="number" name="price_per_day" class="form-control" step="0.01" min="0" value="<?= htmlspecialchars($_POST['price_per_day'] ?? $boat['price_per_day']) ?>" required>
             </div>
             <div class="col-md-4">
