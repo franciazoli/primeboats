@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $body .= "Phone: $phone\n";
         $body .= "Boat: $boatName\n";
         $body .= "Message: $message\n";
-        mail(CONTACT_EMAIL, $subject, $body, "From: noreply@primeboats.nl");
+        mail(CONTACT_EMAIL . ', sales@primeboats.nl', $subject, $body, "From: noreply@primeboats.nl");
 
         $success = true;
     }
